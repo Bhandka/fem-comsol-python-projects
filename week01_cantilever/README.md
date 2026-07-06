@@ -15,7 +15,7 @@ week01/
 │   ├── analytical_beam.py
 │   └── comparison_plot.png
 └── README.md
-
+```
 ## 🧪 Problem Description
 
 A silicon cantilever beam is subjected to a tip load. The geometry and material properties are:
@@ -67,7 +67,7 @@ COMSOL displacement ≈ 0.0021809 µm
 
 Generated automatically by running `python/analytical_beam.py`.
 
-![Comparison Plot](python/comparison_plot.png)
+![Displacement Comparison Plot](python/comparison_plot.png)
 
 | Method             | Displacement (µm) |
 |--------------------|-------------------|

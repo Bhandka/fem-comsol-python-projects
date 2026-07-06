@@ -66,8 +66,7 @@ COMSOL displacement ≈ 0.0021809 µm
 ## 📊 Comparison Plot
 
 Generated automatically by running `python/analytical_beam.py`.
-
-![Displacement Comparison Plot](python/comparison_plot.png)
+[https://github.com/Bhandka/fem-comsol-python-projects/blob/main/week01_cantilever/comparison_plot.png](comparison_plot.png)
 
 | Method             | Displacement (µm) |
 |--------------------|-------------------|

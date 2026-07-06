@@ -6,15 +6,14 @@ The goal is to ensure that both methods agree and that the COMSOL model is corre
 
 ## 📁 Folder Structure
 
+```text
 week01/
-│── comsol/
-│   └── cantilever.mph
+├── comsol/
+│   ├── cantilever.mph
 │   └── displacement_value.csv
-│
-│── python/
+├── python/
 │   ├── analytical_beam.py
-│   ├── comparison_plot.png
-│   
+│   └── comparison_plot.png
 └── README.md
 
 ## 🧪 Problem Description

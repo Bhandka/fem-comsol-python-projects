@@ -1,90 +1,91 @@
-# Week 01 – Cantilever Beam Comparison (COMSOL vs Python)
+# Cantilever Beam FEA Automation with COMSOL and Python
 
-This project validates a simple cantilever beam model by comparing the **analytical displacement** from classical beam theory with the **numerical displacement** obtained from COMSOL Multiphysics.
+This project automates a COMSOL Multiphysics cantilever beam study using Python. It sweeps several tip-force values, solves the model, compares the finite-element results against analytical beam theory, and exports the results to CSV and a plot image.
 
-The goal is to ensure that both methods agree and that the COMSOL model is correctly configured.
+## Overview
 
-## 📁 Folder Structure
+The workflow includes:
+
+- Loading a saved COMSOL model from the Comsol folder
+- Running a force-sweep analysis for multiple tip loads
+- Extracting tip deflection values from the COMSOL solution
+- Comparing FEA results with the analytical cantilever beam formula
+- Saving results to a CSV file and generating a plot
+
+This is a useful example for learning how to combine COMSOL with Python for parametric studies and automated post-processing.
+
+## Project Structure
 
 ```text
-week01/
-├── comsol/
-│   ├── cantilever.mph
-│   └── displacement_value.csv
-├── python/
-│   ├── analytical_beam.py
-│   └── comparison_plot.png
+week02_cantilever_Python/
+├── Comsol/
+│   └── week02_cantilever_Python.mph
+├── Python/
+│   └── week02_cantilever_Python.py
+├── results/
+│   ├── force_sweep_results.csv
+│   └── force_sweep_plot.png
 └── README.md
 ```
-## 🧪 Problem Description
 
-A silicon cantilever beam is subjected to a tip load. The geometry and material properties are:
+## What the Script Does
 
-- **Length (L):** 100 µm  
-- **Width (b):** 10 µm  
-- **Thickness (h):** 10 µm  
-- **Load (F):** 1 µN downward  
-- **Material:** Silicon  
-- **Young’s Modulus (E):** 170 GPa  
-- **Poisson's Ratio (ν):** 0.22 (used for COMSOL 2D model)
+The Python script:
 
-The objective is to compute the **tip displacement** using:
+1. Starts a COMSOL client
+2. Loads the saved .mph model
+3. Defines the beam geometry and material properties
+4. Sweeps tip force values in micronewtons
+5. Solves the model for each force
+6. Computes both FEA and analytical tip deflection
+7. Saves the comparison results to CSV
+8. Generates a plot for visualization
 
-1. Analytical beam theory
-2. COMSOL Multiphysics simulation (2D solid mechanics)
+## Requirements
 
-## 📐 Analytical Calculation (Python)
+Before running the script, make sure you have:
 
-The analytical displacement is computed using Euler-Bernoulli beam theory:
+- COMSOL Multiphysics installed and licensed
+- Python 3.x
+- The following Python packages:
 
-\[
-\delta = \frac{F L^3}{3 E I}, \quad I = \frac{b h^3}{12}
-\]
+```bash
+pip install mph numpy pandas matplotlib
+```
 
-**Python script:** `python/analytical_beam.py`
+## Setup
 
-**Result:**
-Analytical displacement ≈ 0.00235 µm
+1. Open the project folder.
+2. Ensure the COMSOL model file exists at:
+   - Comsol/week02_cantilever_Python.mph
+3. Make sure the script points to the correct COMSOL model path.
+4. Run the Python script from the project root.
 
-## 🖥️ COMSOL Simulation
+## Usage
 
-The COMSOL model is stored in:
-comsol/cantilever.mph
+Run the script with:
 
-**Model setup:**
-- **Physics:** Solid Mechanics (3D)
-- **Boundary condition:** Fixed constraint on the left face
-- **Load:** 1 µN point load applied to the center of the tip face
-- **Mesh:** Fine mapped hexahedral mesh (convergence verified)
+```bash
+python Python/week02_cantilever_Python.py
+```
 
-The tip displacement was extracted using:
-Results → Derived Values → Point Evaluation → solid.disp
+The script will:
 
-**Result (fine mesh):**
-COMSOL displacement ≈ 0.0021809 µm
+- print a table of FEA vs. analytical deflection results in the terminal
+- save the numerical results to results/force_sweep_results.csv
+- create a plot image at results/force_sweep_plot.png
 
-## 📊 Comparison Plot
+## Output Files
 
-Generated automatically by running `python/analytical_beam.py`.
-[https://github.com/Bhandka/fem-comsol-python-projects/blob/main/week01_cantilever/comparison_plot.png](comparison_plot.png)
+- results/force_sweep_results.csv: tabular comparison of force, FEA deflection, analytical deflection, and percent difference
+- results/force_sweep_plot.png: visualization of deflection versus applied force
 
-| Method             | Displacement (µm) |
-|--------------------|-------------------|
-| Python Analytical  | 0.00235           |
-| COMSOL (fine mesh) | 0.0021809         |
+## Notes
 
+- The beam dimensions and material properties are defined in the script and should match the COMSOL model settings.
+- The script uses a hard-coded path to the COMSOL model, so you may need to adjust it if you move the project or use a different machine.
+- This example is intended for educational and research use.
 
-##  Conclusion
+## License
 
-- The COMSOL model is **correctly configured** and shows proper mesh convergence.
-- The 7.2% difference is **physically justified** by shear deformation effects absent in the 1D beam theory.
-- This validates the setup for future studies involving more complex geometries or load cases.
-
-## 🚀 Running the Code
-
-To reproduce the analytical results and generate the comparison plot:
-
-1. Clone this repository.
-2. Install the required Python package:
-   ```bash
-   pip install matplotlib
+This project is provided for educational purposes. Feel free to adapt and extend it for your own simulations.
